@@ -1,10 +1,7 @@
 package com.xpanxion.solution;
 
 import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -12,20 +9,6 @@ import com.xpanxion.java.assignments.DataAccess;
 import com.xpanxion.java.assignments.model.*;
 
 public class Worker {
-
-    public static void main(String[] args) {
-        Worker test = new Worker();
-        // test.ex1();
-        // test.ex2();
-        // test.ex3();
-        // test.ex4();
-        // test.ex5();
-        // test.ex6();
-        test.ex7();
-        // test.ex8();
-        // test.ex9();
-        // test.ex10();
-    }
 
     public void ex1() {
         List<Product> productList = DataAccess.getProducts();
@@ -75,10 +58,13 @@ public class Worker {
     }
 
     public void ex7() {
-        Arrays.stream(DataAccess.getWords().split(" "))
-                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
-                .entrySet()
-                .forEach(System.out::println);
+        var map = Arrays.stream(DataAccess.getWords().split(" "))
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+        var keys = new ArrayList<String>(map.keySet());
+        Collections.sort(keys);
+        for(String key : keys) {
+            System.out.println(key + "=" + map.get(key));
+        }
     }
 
     public void ex8() {
